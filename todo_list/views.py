@@ -24,6 +24,21 @@ def detail(request, todo_id):
         'todo': todo
         })
 
+def todos_update(request, todo_id):
+   
+    if request.method == "POST":
+        todos = Todos.objects.get(pk=todo_id)
+        
+        form = TodosForm(request.POST or None, instance=todos)
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Todo was edited')
+            return redirect('detail', todos.id)
+    else:
+        todos = Todos.objects.get(pk=todo_id)
+        return render(request, 'todos_update.html', { 'todos': todos })
+
 def delete(request, todo_id):
     todo = Todos.objects.get(pk=todo_id)
     todo.delete()
