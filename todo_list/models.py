@@ -5,5 +5,5 @@ class Todos(models.Model):
     added_on = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.add_item
+        return self.add_item + ' | ' + str(self.added_on)
 
