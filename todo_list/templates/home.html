@@ -2,80 +2,11 @@
 
 {% block content %}
 
-    {% if messages %}
-        {% for message in messages %}
-
-        <div class="alert alert-warning alert-dismissable" role="alert">
-            
-            <button class="close" data-dismiss="alert">
-                <small><sup> x </sup></small>
-            </button>
-
-            {{ message }}
-
-        </div>
-        {% endfor %}
-    {% endif %}
-
-    {% if all_todos %}
-    <table class="table tabled-bordered">
-        {% for todo in all_todos %}
-    
-                <tr>
-                    <td>
-                        <div class="card">
-                            <a href="{% url 'detail' todo.id %}">
-                              <div class="card-content">
-                                <span class="card-title"></span>
-                                
-                                  <p>{{ todo.add_item }}</p>
-                                
-                              </div>
-                            </a>
-                        </div>
-                    </td>
-
-                    <td> 
-                        <div class="card bg bg-info">
-                            
-                              <div class="card-content">
-                                <span class="card-title"></span>
-                                <p>
-                                    <a class="text-white" href="{% url 'todos_update' todo.id %}"> 
-                                        Edit 
-                                    </a>
-
-                                </p>
-                                
-                              </div>
-                            
-                        </div>
-                        
-                    <td>
-                    
-                    <td> 
-                        <div class="card bg bg-danger">
-                            
-                              <div class="card-content">
-                                <span class="card-title"></span>
-                                <p>
-                                    <a href="{% url 'delete' todo.id %}"> 
-                                        delete 
-                                    </a>
-
-                                </p>
-                                
-                                  <!-- <p>{{ todo.add_item }}</p> -->
-                                
-                              </div>
-                            
-                        </div>
-                        
-                    <td>
-                </tr>
-        {% endfor %}
-    </table>
-        
-    {% endif %}
-
+<form class="form-inline my-2 my-lg-0" method="POST">
+    {% csrf_token %}
+    <input type="text" class="form-control mr-sm-2" id="inlineFormInputName" placeholder="Add a todo" name="add_item">
+  
+  <!-- <input class="form-control mr-sm-2" type="search" placeholder="Add todo" aria-label="Search" name="add_item"> -->
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button>
+</form>
 {% endblock %}
